@@ -18,7 +18,22 @@ public class Feld extends javax.swing.JButton {
 
 	public void setStein (Stein stein) {
 		this.stein = stein;
+		stein.setFeld(this);
 		this.setForeground( stein.ist_schwarz() ? Color.black : Color.white );
 		this.setText("O");
+	}
+
+	public Brett getBrett() {
+		return brett;
+	}
+
+	public Stein getStein() {
+		return stein;
+	}
+
+	public void wegStein() {
+		stein = null;
+		brett.merkeBeginn();
+		setText("");
 	}
 }

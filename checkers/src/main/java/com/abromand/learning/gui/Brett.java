@@ -2,11 +2,14 @@ package com.abromand.learning.gui;
 
 import java.awt.Color;
 import com.abromand.learning.root.Einfach;
+import com.abromand.learning.root.Stein;
  
 /**
  * @author amin
  */
 public class Brett extends javax.swing.JFrame {
+
+    private boolean istZugbeginn = true;
  
 
     private javax.swing.JPanel jPanel1;
@@ -76,6 +79,23 @@ public class Brett extends javax.swing.JFrame {
 
         this.setSize(500,500);
     }
+
+
+
+    public boolean getZugbeginn() {
+        return istZugbeginn;
+    }
+
+    public void merkeBeginn() {
+        istZugbeginn = false;
+    }
+
+    public void merkeEnde() {
+        istZugbeginn = true;
+    }
+
+
+
  
     /**
      * Zeigt ein JFrame im BorderLayout mit je einem Button pro Bereich an.
@@ -96,15 +116,27 @@ public class Brett extends javax.swing.JFrame {
 
 
     private class FeldListener implements java.awt.event.ActionListener {
+        private Stein st = null;
+
         public void actionPerformed ( java.awt.event.ActionEvent evt ) {
+            Feld f = null;
+
             for ( int z=0; z<feld.length; z++ ) {
                 for ( int sp=0; sp<feld[z].length; sp++ ) {
                     if (feld[z][sp]==evt.getSource()) {
                         System.out.println("Feld " + z + ", " + sp + " geklickt!");
+                        f = feld[z][sp];
+                        break;
                     }
                 }
             }
             
+            if ( getZugbeginn() ) {
+                st = f.getStein();
+                f.wegStein();
+            } else {
+                f.setStein(st);
+            }
         }
     }
     FeldListener fl = new FeldListener();
