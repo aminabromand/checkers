@@ -43,7 +43,7 @@ public class Brett extends javax.swing.JFrame {
         boolean schwarz = true;
         for ( int z=0; z<feld.length; z++ ) {
             for ( int sp=0; sp<feld[z].length; sp++ ) {
-                Feld newFeld = new Feld(this, schwarz);
+                Feld newFeld = new Feld( this, schwarz, z, sp );
                 newFeld.setBackground( schwarz ? Color.darkGray : Color.lightGray );
                 newFeld.addActionListener(fl);
 
@@ -54,7 +54,6 @@ public class Brett extends javax.swing.JFrame {
                         newFeld.setStein( new Einfach (newFeld, true) );
                     }
                 }
-
 
                 feld[z][sp] = newFeld;
                 jPanel1.add(newFeld);
@@ -134,8 +133,11 @@ public class Brett extends javax.swing.JFrame {
             if ( getZugbeginn() ) {
                 st = f.getStein();
                 f.wegStein();
-            } else {
+            } else if ( st.istOK(f) ) {
                 f.setStein(st);
+            }
+            else {
+                st.getFeld().setStein(st);
             }
         }
     }
