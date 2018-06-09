@@ -11,6 +11,13 @@ public class Brett extends javax.swing.JFrame {
 
     private boolean istZugbeginn = true;
  
+    /* weiss:   1       00000001
+     * schwarz: 2       00000010
+     * "beide": 3       00000011
+     */
+    private final int WEISS = 1;
+    private final int SCHWARZ = 2;
+    private int amZug = WEISS;
 
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jButton1;
@@ -132,7 +139,9 @@ public class Brett extends javax.swing.JFrame {
             
             if ( getZugbeginn() ) {
                 st = f.getStein();
-                f.wegStein();
+                if ( (st.ist_schwarz() && (amZug & SCHWARZ) != 0) || (!st.ist_schwarz() && (amZug & WEISS) != 0)) {
+                    f.wegStein();
+                }
             } else if ( st.istOK(f) ) {
                 f.setStein(st);
             }
