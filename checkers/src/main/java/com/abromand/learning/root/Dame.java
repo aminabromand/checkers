@@ -5,8 +5,8 @@ import com.abromand.learning.gui.Feld;
 /**
  * @author amin
  */
-public class Einfach extends Stein {
-	public Einfach (Feld feld, boolean schwarz) {
+public class Dame extends Stein {
+	public Dame (Feld feld, boolean schwarz) {
 		super(feld, schwarz);
 	}
 
@@ -16,9 +16,7 @@ public class Einfach extends Stein {
 
 		if ( Math.abs(dX) != Math.abs(dY) ) {
 			return false;
-		} else if ( Math.abs(dX) == 0 || Math.abs(dX) > 2) {
-			return false;
-		} else if ( (ist_schwarz() && dY > 0) || (!ist_schwarz() && dY < 0) ) {
+		} else if ( Math.abs(dX) == 0 ) {
 			return false;
 		}
 
@@ -26,6 +24,6 @@ public class Einfach extends Stein {
 	}
 
 	public String getSymbol() {
-		return "\u25ce";
+		return "\u25c9";
 	}
 }

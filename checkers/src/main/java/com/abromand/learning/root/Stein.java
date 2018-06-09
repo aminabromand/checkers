@@ -21,25 +21,14 @@ public abstract class Stein {
 
 	public void setFeld( Feld feld ) {
 		this.feld = feld;
-		feld.getBrett().merkeEnde( this );
+		//feld.getBrett().merkeEnde( this );
 	}
 
 	public Feld getFeld() {
 		return feld;
 	}
 
-	public boolean istOK ( Feld feld ) {
-		int dX = feld.getSpalte() - getFeld().getSpalte();
-		int dY = feld.getZeile() - getFeld().getZeile();
+	abstract public boolean istOK( Feld feld );
 
-		if ( Math.abs(dX) != Math.abs(dY) ) {
-			return false;
-		} else if ( Math.abs(dX) == 0 || Math.abs(dX) > 2) {
-			return false;
-		} else if ( (ist_schwarz() && dY > 0) || (!ist_schwarz() && dY < 0) ) {
-			return false;
-		}
-
-		return true;
-	}
+	abstract public String getSymbol();
 }
