@@ -21,7 +21,7 @@ public abstract class Stein {
 
 	public void setFeld( Feld feld ) {
 		this.feld = feld;
-		feld.getBrett().merkeEnde();
+		feld.getBrett().merkeEnde( this );
 	}
 
 	public Feld getFeld() {

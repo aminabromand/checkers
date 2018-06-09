@@ -96,7 +96,12 @@ public class Brett extends javax.swing.JFrame {
         istZugbeginn = false;
     }
 
-    public void merkeEnde() {
+    public void merkeEnde( Stein stein ) {
+        //System.out.println("cname: " + stein.getClass().getCanonicalName());
+        //if ( stein.getClass().getCanonicalName().equals( "root.Einfach" ) ) {
+        if ( stein instanceof Einfach ) {
+            amZug = stein.ist_schwarz() ? WEISS : SCHWARZ;
+        }
         istZugbeginn = true;
     }
 
@@ -139,6 +144,9 @@ public class Brett extends javax.swing.JFrame {
             
             if ( getZugbeginn() ) {
                 st = f.getStein();
+                if (st == null) {
+                    return;
+                }
                 if ( (st.ist_schwarz() && (amZug & SCHWARZ) != 0) || (!st.ist_schwarz() && (amZug & WEISS) != 0)) {
                     f.wegStein();
                 }
