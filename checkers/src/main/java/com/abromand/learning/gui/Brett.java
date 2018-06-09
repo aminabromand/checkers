@@ -3,6 +3,7 @@ package com.abromand.learning.gui;
 import java.awt.Color;
 import java.awt.Font;
 import com.abromand.learning.root.Einfach;
+import com.abromand.learning.root.Dame;
 import com.abromand.learning.root.Stein;
  
 /**
@@ -18,6 +19,7 @@ public class Brett extends javax.swing.JFrame {
      */
     private final int WEISS = 1;
     private final int SCHWARZ = 2;
+    private final int BEIDE = 3;
     private int amZug = WEISS;
 
     private javax.swing.JPanel jPanel1;
@@ -104,6 +106,10 @@ public class Brett extends javax.swing.JFrame {
         //System.out.println("cname: " + stein.getClass().getCanonicalName());
         //if ( stein.getClass().getCanonicalName().equals( "root.Einfach" ) ) {
         if ( stein instanceof Einfach ) {
+            amZug = stein.ist_schwarz() ? WEISS : SCHWARZ;
+            System.out.println("am Zug: " + amZug);
+        } else if ( stein instanceof Dame ) {
+            //ToDo: hier müsste der Schlagzwang implementiert werden
             amZug = stein.ist_schwarz() ? WEISS : SCHWARZ;
             System.out.println("am Zug: " + amZug);
         }
@@ -208,7 +214,7 @@ public class Brett extends javax.swing.JFrame {
                 merkeEnde(st);
             }
             else {
-                st.getFeld().setStein(st);
+                st.getFeld().setStein(st, true);
                 st = null;
                 istZugbeginn = true;
             }
